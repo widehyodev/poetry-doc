@@ -44,8 +44,8 @@ function! PoetryHelpPopup() abort
   let tags_file = project_root .. "/.tags"
 
   let s:plugin_dir = expand('<sfile>:p:h')
-  let s:python_file_path = fnamemodify(s:plugin_dir .. '/process_imports.py')
-  let s:awk_file_path = fnamemodify(s:plugin_dir .. '/ctags_to_fullnames.awk')
+  let s:python_file_path = fnamemodify(s:plugin_dir .. '/process_imports.py', ':p')
+  let s:awk_file_path = fnamemodify(s:plugin_dir .. '/ctags_to_fullnames.awk', ':p')
 
   " Use the Python script to process imports
   let ast_result = system('python3 ' .. s:python_file_path .. ' ' .. shellescape(current_file))
