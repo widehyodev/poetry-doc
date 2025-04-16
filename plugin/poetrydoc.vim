@@ -8,6 +8,10 @@ if exists('g:loaded_poetrydoc')
 endif
 let g:loaded_poetrydoc = 1
 
+if !exists('s:plugin_dir')
+  let s:plugin_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+endif
+
 function! s:GenerateTags() abort
   " Find the pyproject.toml file (project root)
   let pyproject_file_path = findfile('pyproject.toml', expand("%:p:h") . ";")
@@ -22,7 +26,7 @@ function! s:GenerateTags() abort
   call system(cmd)
 endfunction
 
-function! s:PoetryHelpPopup() abort
+function! PoetryHelpPopup() abort
   call s:GenerateTags()
 
   " Get the current buffer's file path
@@ -233,8 +237,8 @@ endfunction
 
 " Key mapping to launch the popup on pressing <leader> K
 if !exists(":PoetryHelpPopup")
-  command -nargs=1 PoetryHelpPopup :call s:PoetryHelpPopup(expand('<cword>'))<CR>
+  command -nargs=1 PoetryHelpPopup :call PoetryHelpPopup(expand('<cword>'))<CR>
 endif
-if !hasmapto('s:PoetryHelpPopup')
-  nnoremap <Leader>K :call s:PoetryHelpPopup()<CR>
+if !hasmapto('PoetryHelpPopup')
+  nnoremap <Leader>K :call PoetryHelpPopup()<CR>
 endif
