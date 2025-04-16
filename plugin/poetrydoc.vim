@@ -180,7 +180,7 @@ function! s:OpenPydocPopupCallback(id, result) abort
   call s:OpenPydocPopup(target_dict)
 endfunction
 
-# help function for navigating popup
+" help function for navigating popup
 function! s:scroll_popup_filter(winid, key) abort
   if a:key ==# "j"
     call win_execute(a:winid, "normal! \<c-e>")
