@@ -14,14 +14,14 @@ endif
 
 function! s:GenerateTags() abort
   " Find the pyproject.toml file (project root)
-  let pyproject_file_path = findfile('pyproject.toml', expand("%:p:h") . ";")
-  let project_root = fnamemodify(pyproject_file_path, ":p:h")
-  if project_root == ""
-    echo "pyproject.toml not found!"
+  let pyproject_file_path = findfile('pyproject.toml', expand('%:p:h') . ';')
+  let project_root = fnamemodify(pyproject_file_path, ':p:h')
+  if project_root == ''
+    echo 'pyproject.toml not found!'
     return
   endif
   " update ctags .tags file in the project root
-  let tags_file = project_root .. "/.tags"
+  let tags_file = project_root .. '/.tags'
   let cmd = 'cd ' .. project_root .. ' && ctags -R --languages=Python -f .tags .'
   call system(cmd)
 endfunction
@@ -30,18 +30,18 @@ function! PoetryHelpPopup() abort
   call s:GenerateTags()
 
   " Get the current buffer's file path
-  let current_file = expand("%:p")
+  let current_file = expand('%:p')
 
   " Get the project root by finding pyproject.toml
-  let pyproject_file_path = findfile('pyproject.toml', expand("%:p:h") .. ";")
-  let project_root = fnamemodify(pyproject_file_path, ":p:h")
-  if project_root == ""
-    echo "pyproject.toml not found!"
+  let pyproject_file_path = findfile('pyproject.toml', expand('%:p:h') .. ';')
+  let project_root = fnamemodify(pyproject_file_path, ':p:h')
+  if project_root == ''
+    echo 'pyproject.toml not found!'
     return
   endif
 
   " Get the path to .tags file
-  let tags_file = project_root .. "/.tags"
+  let tags_file = project_root .. '/.tags'
 
   let s:python_file_path = fnamemodify(s:plugin_dir .. '/process_imports.py', ':p')
   let s:awk_file_path = fnamemodify(s:plugin_dir .. '/ctags_to_fullnames.awk', ':p')
@@ -54,10 +54,10 @@ function! PoetryHelpPopup() abort
   let help_target = expand('<cword>')
 
   " construct import as converter
-  if len(import_infos[-1]) > 0
+  if len(import_infos) > 0 && import_infos[-1]->match('|') > -1
     let converter = {}
-    for element in copy(import_infos[-1])->split("|")
-      let [key, value] = element->split(":")
+    for element in copy(import_infos[-1])->split('|')
+      let [key, value] = element->split(':')
       let converter[key] = value
     endfor
     let help_target = get(converter, help_target, help_target)
@@ -181,40 +181,40 @@ endfunction
 
 " help function for navigating popup
 function! s:scroll_popup_filter(winid, key) abort
-  if a:key ==# "j"
-    call win_execute(a:winid, "normal! \<c-e>")
-  elseif a:key ==# "k"
-    call win_execute(a:winid, "normal! \<c-y>")
-  elseif a:key ==# "\<c-d>"
-    call win_execute(a:winid, "normal! \<c-d>")
-  elseif a:key ==# "\<c-u>"
-    call win_execute(a:winid, "normal! \<c-u>")
-  elseif a:key ==# "\<c-f>"
-    call win_execute(a:winid, "normal! \<c-f>")
-  elseif a:key ==# "\<c-b>"
-    call win_execute(a:winid, "normal! \<c-b>")
-  elseif a:key ==# "G"
-    call win_execute(a:winid, "normal! G")
-  elseif a:key ==# "g"
-    call win_execute(a:winid, "normal! gg")
-  elseif a:key ==# "1"
-    call win_execute(a:winid, "normal! 10%")
-  elseif a:key ==# "2"
-    call win_execute(a:winid, "normal! 20%")
-  elseif a:key ==# "3"
-    call win_execute(a:winid, "normal! 30%")
-  elseif a:key ==# "4"
-    call win_execute(a:winid, "normal! 40%")
-  elseif a:key ==# "5"
-    call win_execute(a:winid, "normal! 50%")
-  elseif a:key ==# "6"
-    call win_execute(a:winid, "normal! 60%")
-  elseif a:key ==# "7"
-    call win_execute(a:winid, "normal! 70%")
-  elseif a:key ==# "8"
-    call win_execute(a:winid, "normal! 80%")
-  elseif a:key ==# "9"
-    call win_execute(a:winid, "normal! 90%")
+  if a:key ==# 'j'
+    call win_execute(a:winid, 'normal! \<c-e>')
+  elseif a:key ==# 'k'
+    call win_execute(a:winid, 'normal! \<c-y>')
+  elseif a:key ==# '\<c-d>'
+    call win_execute(a:winid, 'normal! \<c-d>')
+  elseif a:key ==# '\<c-u>'
+    call win_execute(a:winid, 'normal! \<c-u>')
+  elseif a:key ==# '\<c-f>'
+    call win_execute(a:winid, 'normal! \<c-f>')
+  elseif a:key ==# '\<c-b>'
+    call win_execute(a:winid, 'normal! \<c-b>')
+  elseif a:key ==# 'G'
+    call win_execute(a:winid, 'normal! G')
+  elseif a:key ==# 'g'
+    call win_execute(a:winid, 'normal! gg')
+  elseif a:key ==# '1'
+    call win_execute(a:winid, 'normal! 10%')
+  elseif a:key ==# '2'
+    call win_execute(a:winid, 'normal! 20%')
+  elseif a:key ==# '3'
+    call win_execute(a:winid, 'normal! 30%')
+  elseif a:key ==# '4'
+    call win_execute(a:winid, 'normal! 40%')
+  elseif a:key ==# '5'
+    call win_execute(a:winid, 'normal! 50%')
+  elseif a:key ==# '6'
+    call win_execute(a:winid, 'normal! 60%')
+  elseif a:key ==# '7'
+    call win_execute(a:winid, 'normal! 70%')
+  elseif a:key ==# '8'
+    call win_execute(a:winid, 'normal! 80%')
+  elseif a:key ==# '9'
+    call win_execute(a:winid, 'normal! 90%')
   elseif a:key ==# 'q'
     call popup_close(a:winid)
   else
@@ -235,7 +235,7 @@ function! s:popup_filter(winid, key) abort
 endfunction
 
 " Key mapping to launch the popup on pressing <leader> K
-if !exists(":PoetryHelpPopup")
+if !exists(':PoetryHelpPopup')
   command -nargs=1 PoetryHelpPopup :call PoetryHelpPopup(expand('<cword>'))<CR>
 endif
 if !hasmapto('PoetryHelpPopup')
