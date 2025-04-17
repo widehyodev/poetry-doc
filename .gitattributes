@@ -1,1 +1,3 @@
-* text=auto eol=lf
+*.py text eol=lf
+*.vim text eol=lf
+*.awk text eol=lf
