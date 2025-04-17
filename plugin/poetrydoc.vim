@@ -43,7 +43,6 @@ function! PoetryHelpPopup() abort
   " Get the path to .tags file
   let tags_file = project_root .. "/.tags"
 
-  let s:plugin_dir = expand('<sfile>:p:h')
   let s:python_file_path = fnamemodify(s:plugin_dir .. '/process_imports.py', ':p')
   let s:awk_file_path = fnamemodify(s:plugin_dir .. '/ctags_to_fullnames.awk', ':p')
 
