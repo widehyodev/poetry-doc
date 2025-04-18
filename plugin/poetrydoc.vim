@@ -181,18 +181,24 @@ endfunction
 
 " help function for navigating popup
 function! s:scroll_popup_filter(winid, key) abort
+  let ctrl_e = nr2char(5) " ^E
+  let ctrl_y = nr2char(25) " ^Y
+  let ctrl_d = nr2char(4) " ^D
+  let ctrl_u = nr2char(21) " ^U
+  let ctrl_f = nr2char(6) " ^F
+  let ctrl_b = nr2char(2) " ^B
   if a:key ==# 'j'
-    call win_execute(a:winid, 'normal! \<c-e>')
+    call win_execute(a:winid, 'normal! ' .. ctrl_e)
   elseif a:key ==# 'k'
-    call win_execute(a:winid, 'normal! \<c-y>')
-  elseif a:key ==# '\<c-d>'
-    call win_execute(a:winid, 'normal! \<c-d>')
-  elseif a:key ==# '\<c-u>'
-    call win_execute(a:winid, 'normal! \<c-u>')
-  elseif a:key ==# '\<c-f>'
-    call win_execute(a:winid, 'normal! \<c-f>')
-  elseif a:key ==# '\<c-b>'
-    call win_execute(a:winid, 'normal! \<c-b>')
+    call win_execute(a:winid, 'normal! ' .. ctrl_y)
+  elseif a:key ==# ctrl_d
+    call win_execute(a:winid, 'normal! ' .. ctrl_d)
+  elseif a:key ==# ctrl_u
+    call win_execute(a:winid, 'normal! ' .. ctrl_u)
+  elseif a:key ==# ctrl_f
+    call win_execute(a:winid, 'normal! ' .. ctrl_f)
+  elseif a:key ==# ctrl_b
+    call win_execute(a:winid, 'normal! ' .. ctrl_b)
   elseif a:key ==# 'G'
     call win_execute(a:winid, 'normal! G')
   elseif a:key ==# 'g'
