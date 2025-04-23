@@ -169,12 +169,12 @@ function! s:ShowPydocPopup() abort
         \ 'maxheight': height,
         \ 'cursorline': 1,
         \ 'scrollbar': 1,
-        \ 'callback': 's:OpenPydocPopupCallback'
+        \ 'callback': 'OpenPydocPopupCallback'
         \ }
   call timer_start(10, {-> popup_menu(s:pyhelp_dict_list, opts) })
 endfunction
 
-function! s:OpenPydocPopupCallback(id, result) abort
+function! OpenPydocPopupCallback(id, result) abort
   let target_dict = s:pyhelp_dict_list[a:result - 1]
   call s:OpenPydocPopup(target_dict)
 endfunction
